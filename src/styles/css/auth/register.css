@@ -1,0 +1,87 @@
+.register-container {
+    font-family: "Segoe UI", sans-serif;
+    width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 55px;
+    background-color: #15397f;
+    border-radius: 15px;
+}
+
+.register-left {
+    width: 50%;
+    padding: 20px;
+    padding-top: 0;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: white;
+    margin-top: 30px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    display: block;
+    color: white;
+}
+
+input {
+    width: 95%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input:focus {
+    border-color: white;
+    outline: none;
+}
+
+.register-btn {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: white;
+    color: #15397f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.register-btn:hover {
+    background-color: #afd2f1;
+}
+
+.register-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    max-width: 80%;
+    height: auto;
+}
+
+.error-message {
+    color: red;
+}

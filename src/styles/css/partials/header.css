@@ -1,0 +1,96 @@
+#wrapper-header {
+    background-color: #fff;
+    box-shadow: 0 2px 8px hsla(0, 0%, 77.6%, .25);
+    border-bottom: 1px solid hsla(0, 0%, 93.3%, .7);
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    position: relative;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.header-container a {
+    text-decoration: none;
+    color: #15397f;
+}
+
+.nav-bar-menu a:hover {
+    border-bottom: 2px solid #a0c9eb;
+}
+
+.nav-bar-menu {
+    display: flex;
+}
+
+.link-item-1,
+.link-item-2,
+.link-item-3,
+.link-item-4,
+.link-item-5,
+.link-item-6 {
+    text-align: center;
+    padding: 20px;
+}
+
+.auth-menu {
+    display: flex;
+}
+
+.auth-menu a:hover {
+    border-bottom: 2px solid #a0c9eb;
+}
+
+.auth-item-1,
+.auth-item-2,
+.auth-item-3 {
+    padding: 20px;
+}
+
+.img-logo {
+    width: 120px;
+}
+
+.avt-user {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 10;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f8f8f8;
+}
+
+.auth-menu>.user-info>.username {
+    margin-left: 10px;
+}
+
+.user-info>span {
+    text-transform: uppercase;
+}

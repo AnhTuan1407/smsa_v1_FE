@@ -1,0 +1,77 @@
+
+/* Thiết lập bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Thiết kế tiêu đề bảng */
+th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Thiết kế cột image */
+.service-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+/* Thiết kế các nút sửa, xóa */
+button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Hover effects for buttons */
+.edit-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+
+    .service-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    button {
+        font-size: 12px;
+    }
+}

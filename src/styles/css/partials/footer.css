@@ -1,0 +1,154 @@
+.footer {
+    font-size: 13px;
+    margin-top: 55px;
+}
+
+.footer-container {
+    background-color: #15397f;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.footer-container a {
+    color: white;
+    text-decoration: none;
+    text-decoration-color: white;
+    transition: color 0.3s;
+}
+
+.footer-container a:hover {
+    color: #ffa500;
+}
+
+.footer-container ul li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-copyright {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 0.75rem;
+    text-align: center
+}
+
+.footer-links-1 a,
+.footer-links-2 a,
+.footer-links-3 a {
+    text-decoration: none;
+    text-decoration-color: white;
+    flex-direction: row;
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.footer-links-1,
+.footer-links-2,
+.footer-links-3 {}
+
+.footer-links-1 {
+    max-width: 148px;
+}
+
+.footer-links-2 {
+    max-width: 300px;
+}
+
+.footer-links-3 {
+    max-width: 275px;
+}
+
+.application-download {
+    color: white;
+    max-width: 136px;
+}
+
+.application-download>div {
+    display: flex;
+    align-items: center;
+}
+
+.application-download>div>div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.application-download a {
+    width: 60px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.application-download .btn-app-store,
+.application-download .btn-gg-play {
+    width: 100%;
+    height: 100%;
+}
+
+.qr-code {
+    width: 48px;
+    height: 48px;
+}
+
+.info-social-media {
+    color: white;
+    display: flex;
+    gap: 10px;
+    max-width: 275px;
+    flex-direction: column;
+}
+
+.info-social-media>div {
+    display: flex;
+    gap: 8px;
+}
+
+.tiktok a {
+    display: flex;
+    align-items: center;
+}
+
+.tiktok img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.tiktok div {
+    font-size: 11px;
+}
+
+.youtube a {
+    display: flex;
+    align-items: center;
+}
+
+.youtube img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.youtube div {
+    font-size: 11px;
+}
+
+.facebook a {
+    display: flex;
+    align-items: center;
+}
+
+.facebook img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.facebook div {
+    font-size: 11px;
+}
