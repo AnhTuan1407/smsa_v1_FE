@@ -38,6 +38,24 @@ const Sidebar = () => {
                         System
                     </div>
 
+                    {/* Nav Item - Category */}
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="/admin/category/list" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i className="fas fa-fw fa-shopping-cart"></i>
+                            <span>Quản lý danh mục</span>
+                        </a>
+                    </li>
+
+                    {/* Nav Item - SubCategory */}
+                    <li className="nav-item">
+                        <a className="nav-link collapsed" href="/admin/subCategory/list" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i className="fas fa-fw fa-shopping-cart"></i>
+                            <span>Quản lý danh mục phụ</span>
+                        </a>
+                    </li>
+
                     {/* Nav Item - Products */}
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="/admin/products/list" data-toggle="collapse" data-target="#collapseTwo"

@@ -40,7 +40,7 @@ const Header = () => {
             <div id="wrapper-header">
                 <div className="header-container">
                     <div className="logo">
-                        <a href="/api/site/home">
+                        <a href="/">
                             <img
                                 className="img-logo"
                                 src="/images/logo_30shine_new.7135aeb8.png"
@@ -75,18 +75,18 @@ const Header = () => {
                                         <span className='username'>{user.username}</span>
                                     )}
                                 </div>
-
-                                {isDropdownVisible && (
-                                    <div className="dropdown-menu" id="dropdownMenu" ref={dropdownRef}>
-                                        <a href="#">Trang cá nhân</a>
-                                        <a href="#">Thay đổi mật khẩu</a>
-                                        <a href="#">Đặt lịch cắt tóc</a>
-                                        <a href="#" onClick={logout}>Đăng xuất</a>
-                                    </div>
-                                )}
                             </>
                         )}
                     </div>
+
+                    {isDropdownVisible && (
+                        <div className="dropdown-menu" id="dropdownMenu" ref={dropdownRef}>
+                            <a href="#">Trang cá nhân</a>
+                            <a href="#">Thay đổi mật khẩu</a>
+                            <a href="#">Đặt lịch cắt tóc</a>
+                            <a href="#" onClick={logout}>Đăng xuất</a>
+                        </div>
+                    )}
 
                 </div>
             </div>

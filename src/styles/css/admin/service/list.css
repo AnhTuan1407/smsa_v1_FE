@@ -1,9 +1,13 @@
-
 /* Thiết lập bảng */
-table {
+.service-list-table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+}
+
+tr:hover {
+    background-color: #eeecec;
+    color: black;
 }
 
 th,
@@ -36,6 +40,7 @@ button {
     font-size: 14px;
 }
 
+.create-btn,
 .edit-btn {
     background-color: #4CAF50;
     color: white;
@@ -47,12 +52,13 @@ button {
 }
 
 /* Hover effects for buttons */
+.create-btn:hover,
 .edit-btn:hover {
-    background-color: #45a049;
+    background-color: #1c7721;
 }
 
 .delete-btn:hover {
-    background-color: #e53935;
+    background-color: #e01411;
 }
 
 /* Responsive */
