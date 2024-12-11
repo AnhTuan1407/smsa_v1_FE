@@ -6,6 +6,7 @@ import AdminLayout from './routers/admin/AdminLayout';
 import { authRouter, siteRouter } from './routers/index';
 import adminRoutes from './routers/admin/admin.js';
 import RequiredRoleRoute from './routers/guard/RequiredRoleRoute';
+import NotFound404 from './components/NotFound404.js';
 
 function App() {
   return (
@@ -55,6 +56,9 @@ function App() {
             />
           ))}
         </Route>
+
+        {/* Catch-all route for invalid paths */}
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
     </div>
   );

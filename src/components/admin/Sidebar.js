@@ -118,7 +118,7 @@ const Sidebar = () => {
 
                     {/* Sidebar Message */}
                     <div className="sidebar-card d-none d-lg-flex">
-                        <img className="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="..." />
+                        <img className="sidebar-card-illustration mb-2" src="/images/admin/undraw_rocket.svg" alt="..." />
                         <p className="text-center mb-2"><strong>SMSA Admin Pro</strong> is packed with premium features,
                             components,
                             and more!</p>
