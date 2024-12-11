@@ -96,19 +96,19 @@ const StaffList = () => {
                                                 <td>{staff.ADDRESS}</td>
                                                 <td>{staff.GENDER}</td>
                                                 <td>{staff.ROLE}</td>
-                                                {/* <td>
-                                                    {service.IMAGE ? (
+
+                                                <td>
+                                                    {staff.IMAGE ? (
                                                         <img
-                                                            src={`data:image/jpeg;base64,${service.IMAGE}`}
-                                                            alt={service.NAME}
-                                                            className="service-image"
+                                                            src={`data:image/jpeg;base64,${staff.IMAGE}`}
+                                                            alt={staff.NAME}
+                                                            className="staff-image"
                                                         />
                                                     ) : (
                                                         'No Image'
                                                     )}
-                                                </td> */}
+                                                </td>
 
-                                                <td>Hình ảnh</td>
                                                 <td>{staff.LOCATION_ID}</td>
                                                 <td>{staff.RATING}</td>
                                                 <td>

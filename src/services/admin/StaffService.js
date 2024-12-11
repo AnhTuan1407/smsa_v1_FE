@@ -20,7 +20,21 @@ export const findAll = async () => {
 };
 
 export const create = async (values) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/create`, values);
 
+        if (response.data) {
+            return response.data;
+        } else {
+            throw new Error("Không có dữ liệu trả về!");
+        }
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw error.response.data;
+        }
+
+        throw new Error("Có lỗi xảy ra, vui lòng thử lại sau!");
+    }
 };
 
 export const findById = async (id) => {
