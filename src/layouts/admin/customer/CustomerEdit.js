@@ -144,9 +144,9 @@ const CustomerEdit = () => {
                                             <label htmlFor="gender">Gender</label>
                                             <Field as="select" name="gender" className="form-input" >
                                                 <option value="">--Select gender--</option>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
-                                                <option value="other">Other</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
                                             </Field>
                                             <ErrorMessage name="gender" component="div" className="error" />
                                         </div>

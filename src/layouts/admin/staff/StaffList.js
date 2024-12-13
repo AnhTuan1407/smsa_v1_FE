@@ -102,6 +102,7 @@ const StaffList = () => {
                                                         <img
                                                             src={`data:image/jpeg;base64,${staff.IMAGE}`}
                                                             alt={staff.NAME}
+                                                            style={{width: "100px"}}
                                                             className="staff-image"
                                                         />
                                                     ) : (

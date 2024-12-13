@@ -18,7 +18,7 @@ const staffRoutes = [
         element: <StaffEdit />
     },
     {
-        path: "staff/detail/:di",
+        path: "staff/detail/:id",
         element: <StaffDetail />
     },
 

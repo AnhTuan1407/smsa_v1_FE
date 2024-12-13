@@ -57,8 +57,8 @@ const ServiceList = () => {
     };
 
     // Hàm xử lý click vào hàng dịch vụ
-    const handleRowClick = (serviceId) => {
-        navigate(`/admin/services/detail/${serviceId}`);
+    const handleRowClick = (id) => {
+        navigate(`/admin/services/detail/${id}`);
     };
 
     return (

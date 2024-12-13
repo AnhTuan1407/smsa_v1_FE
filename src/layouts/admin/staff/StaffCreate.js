@@ -104,7 +104,7 @@ const StaffCreate = () => {
                                     const response = await staffService.create(formData);
 
                                     if (response.success) {
-                                        toast.success('Thêm mới khách hàng thành công!');
+                                        toast.success('Thêm mới nhân viên thành công!');
                                         navigate('/admin/staff/list');
                                     } else {
                                         toast.error('Không thể thêm mới nhân viên!');
