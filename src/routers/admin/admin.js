@@ -3,6 +3,7 @@ import serviceRoutes from './service';
 import categoryRoutes from './category';
 import customerRoutes from './customer';
 import staffRoutes from './staff';
+import subCategoryRoutes from './subCategory';
 import NotFound404 from '../../components/NotFound404';
 
 const adminRoutes = [
@@ -10,6 +11,8 @@ const adminRoutes = [
     ...categoryRoutes,
     ...customerRoutes,
     ...staffRoutes,
+    ...subCategoryRoutes,
+    
     {
         path: 'dashboard',
         element: <Dashboard />,

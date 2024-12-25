@@ -21,8 +21,16 @@ const ServiceEdit = () => {
         const fetchData = async () => {
             try {
                 // Lấy danh sách subCategory
-                const subCategoryResponse = await subCategoryService.findAll();
-                setSubCategories(subCategoryResponse);
+                try {
+                    const subCategoryResponse = await subCategoryService.findAll();
+                    if (subCategoryResponse.success) {
+                        setSubCategories(subCategoryResponse.data);
+                    } else {
+                        console.error('Không thể tải danh sách danh mục!');
+                    }
+                } catch (error) {
+                    console.error('Lỗi khi lấy danh sách danh mục:', error.message);
+                }
 
                 // Lấy thông tin service theo ID
                 const serviceResponse = await service.findById(id);

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
-import * as staffService from '../../../services/admin/StaffService';
-import * as locationService from '../../../services/admin/LocationService';
-import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React, { useEffect, useState } from "react";
 import { ColorRing } from 'react-loader-spinner';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import * as Yup from "yup";
+import * as locationService from '../../../services/admin/LocationService';
+import * as staffService from '../../../services/admin/StaffService';
 
 const StaffCreate = () => {
 
@@ -52,39 +51,40 @@ const StaffCreate = () => {
 
                             validationSchema={Yup.object({
                                 name: Yup.string()
-                                    .required("Tên khách hàng không được để trống!")
-                                    .min(2, "Tên khách hàng phải có ít nhất 2 ký tự!")
-                                    .max(50, "Tên khách hàng không được vượt quá 50 ký tự!"),
+                                    .required("Staff name is required!")
+                                    .matches(/^[a-zA-Z\s]+$/, "Staff name must not contain special characters!")
+                                    .min(2, "Staff name must be at least 2 characters!")
+                                    .max(50, "Staff name must not exceed 50 characters!"),
 
                                 email: Yup.string()
-                                    .required("Email không được để trống!")
-                                    .email("Địa chỉ email không hợp lệ!"),
+                                    .required("Email is required!")
+                                    .email("Invalid email address!"),
 
                                 phone: Yup.string()
-                                    .required("Số điện thoại không được để trống!")
+                                    .required("Phone number is required!")
                                     .matches(
                                         /^(\+84|0)[0-9]{9}$/,
-                                        "Số điện thoại không hợp lệ! (VD: 0123456789)"
+                                        "Invalid phone number! (e.g., 0123456789)"
                                     ),
 
                                 address: Yup.string()
-                                    .required("Địa chỉ không được để trống!")
-                                    .max(100, "Địa chỉ không được vượt quá 100 ký tự!"),
+                                    .required("Address is required!")
+                                    .max(100, "Address must not exceed 100 characters!"),
 
                                 gender: Yup.string()
-                                    .required("Giới tính không được để trống!"),
+                                    .required("Gender is required!"),
 
                                 role: Yup.string()
-                                    .required("Chức vụ không được để trống!"),
+                                    .required("Role is required!"),
 
                                 locationId: Yup.number()
-                                    .required("Giới tính không được để trống!"),
+                                    .required("Location is required!"),
 
                                 image: Yup.mixed()
-                                    .required("Vui lòng tải lên hình ảnh!")
+                                    .required("Please upload an image!")
                                     .test(
                                         "fileFormat",
-                                        "Định dạng hình ảnh không hợp lệ (chỉ JPEG, PNG, JPG)!",
+                                        "Invalid image format! (only JPEG, PNG, JPG are allowed)!",
                                         (value) => !value || (value && ["image/jpeg", "image/png", "image/jpg"].includes(value.type))
                                     ),
                             })}

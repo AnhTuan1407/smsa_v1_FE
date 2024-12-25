@@ -15,9 +15,16 @@ const CustomerList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await customerService.findAll();
-
-            setCustomers(result);
+            try {
+                const response = await customerService.findAll();
+                if (response.success) {
+                    setCustomers(response.data);
+                } else {
+                    console.error('Không thể tải danh sách khách hàng!');
+                }
+            } catch (error) {
+                toast.error("Lỗi khi lấy danh sách khách hàng: " + error.message);
+            }
         }
 
         fetchData();
@@ -114,7 +121,7 @@ const CustomerList = () => {
                                         ))
                                     ) : (
                                         <tr>
-                                            <td colSpan="7">Không có dịch vụ nào!</td>
+                                            <td colSpan="7">Không có khách hàng nào!</td>
                                         </tr>
                                     )}
                                 </tbody>

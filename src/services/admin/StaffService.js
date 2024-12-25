@@ -74,5 +74,18 @@ export const edit = async (values, id) => {
 };
 
 export const deleteById = async (id) => {
+    try {
+        const response = await axios.delete(`${BASE_URL}/delete/${id}`);
 
-};
+        if (response.data) {
+            return response.data;
+        } else {
+            throw new Error("Không có dữ liệu trả về!");
+        }
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw error.response.data;
+        }
+        throw new Error("Có lỗi xảy ra, vui lòng thử lại sau!");
+    }
+}

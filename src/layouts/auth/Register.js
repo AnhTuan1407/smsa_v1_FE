@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import { Formik, Form, ErrorMessage, Field } from "formik";
-import * as Yup from 'yup';
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from 'react-loader-spinner';
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 import * as registerService from '../../services/auth/RegisterService';
 import '../../styles/css/auth/register.css';
 
@@ -22,14 +21,20 @@ const Register = () => {
                 }}
 
                 validationSchema={Yup.object({
-                    name: Yup.string().required('Họ và tên không được để trống!'),
-                    username: Yup.string().required('Tên đăng nhập không được để trống!'),
-                    password: Yup.string().required('Mật khẩu không được để trống!').min(6, 'Mật khẩu không được ít hơn 6 ký tự!'),
+                    name: Yup.string().required('Name is required!'),
+                    username: Yup.string()
+                        .required('Username is required!')
+                        .matches(/^[a-zA-Z0-9_]+$/, 'Username must not contain special characters!')
+                        .max(20, 'Username must not exceed 20 characters!')
+                        .min(6, 'Username must be at least 6 characters!'),
+                    password: Yup.string()
+                        .required('Password is required!')
+                        .min(6, 'Password must be at least 6 characters!')
+                        .max(20, 'Password must not exceed 20 characters!'),
                     phoneNumber: Yup.string()
-                        .required('Số điện thoại không được để trống!')
-                        .matches(/^\d+$/, 'Số điện thoại chỉ được chứa số!')
-                        .length(10, 'Số điện thoại phải có đúng 10 chữ số!'),
-
+                        .required('Phone number is required!')
+                        .matches(/^\d+$/, 'Phone number must contain only digits!')
+                        .length(10, 'Phone number must be exactly 10 digits!'),
                 })}
 
                 onSubmit={(values, { setSubmitting }) => {

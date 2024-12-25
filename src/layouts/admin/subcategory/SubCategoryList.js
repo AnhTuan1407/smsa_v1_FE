@@ -1,123 +1,117 @@
-import * as staffService from "../../../services/admin/StaffService";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as subCategoryService from '../../../services/admin/SubCategory';
 import Modal from '../../../components/Modal';
+import { ToastContainer, toast } from 'react-toastify';
 
-const StaffList = () => {
-    const navigate = useNavigate();
+const SubCategoryList = () => {
 
-    const [staffList, setStaffList] = useState([]);
-    const [staffToDelete, setStaffToDelete] = useState(null);
+    const [subCategories, setSubCategories] = useState([]);
+    const [subCategoryToDelete, setSubCategoryToDelete] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await staffService.findAll();
-                setStaffList(response);
+                const response = await subCategoryService.findAll();
+                if (response.success) {
+                    setSubCategories(response.data);
+                } else {
+                    console.error('Không thể tải danh sách danh mục!');
+                }
             } catch (error) {
-                toast.error("Lỗi khi lấy danh sách nhân viên: " + error.message);
+                console.error('Lỗi khi lấy danh sách danh mục:', error.message);
             }
         };
 
         fetchData();
     }, []);
 
-    const handleDeleteClick = (staff) => {
-        setStaffToDelete(staff);
+    const handleDeleteClick = (subCategory) => {
+        setSubCategoryToDelete(subCategory);
         setIsModalOpen(true);
     };
 
     const confirmDelete = async () => {
         try {
-            const response = await staffService.deleteById(staffToDelete.STAFF_ID);
+            const response = await subCategoryService.deleteById(subCategoryToDelete.SUB_CATEGORY_ID);
 
             if (response.success) {
-                setStaffToDelete((prev) => prev.filter((s) => s.STAFF_ID !== staffToDelete.STAFF_ID));
-                toast.success("Xóa nhân viên thành công!");
+                setSubCategories((prev) => prev.filter((s) => s.SUB_CATEGORY_ID !== subCategoryToDelete.SUB_CATEGORY_ID));
+                toast.success("Xóa danh mục thành công!");
             } else {
-                toast.error("Xóa nhân viên không thành công!");
+                toast.error("Xóa danh mục không thành công!");
             }
         } catch (error) {
-            toast.error("Có lỗi xảy ra khi xóa nhân viên: ", error.message);
+            console.error('Lỗi khi xóa danh mục:', error.message);
+            toast.error("Có lỗi xảy ra khi xóa danh mục: ", error.message);
         } finally {
             setIsModalOpen(false);
-            staffToDelete(null);
+            setSubCategoryToDelete(null);
         }
     };
 
     const handleRowClick = (id) => {
-        navigate(`/admin/staff/detail/${id}`)
-    }
+        navigate(`/admin/subCategory/detail/${id}`);
+    };
 
     return (
         <>
-            <div id="wp-staff-list">
-                <div className="staff-list-container">
+            <div id="wp-subCategory-list">
+                <div className="subCategory-list-container">
                     <div className="title">
-                        STAFF LIST
+                        SUBCATEGORY LIST
                     </div>
 
                     <div className="content">
-                        <div className="table-container">
-                            <div>
-                                <button className='create-btn' onClick={() => navigate(`/admin/staff/create`)}>
-                                    Thêm mới nhân viên
-                                </button>
-                            </div>
+                        <div>
+                            <button className='create-btn' onClick={() => navigate(`/admin/subCategory/create`)}>
+                                Thêm mới danh mục
+                            </button>
+                        </div>
 
+                        <div className='table-container'>
                             <table className='service-list-table'>
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
+                                        <th>CATEGORY</th>
                                         <th>NAME</th>
-                                        <th>EMAIL</th>
-                                        <th>PHONE</th>
-                                        <th>ADDRESS</th>
-                                        <th>GENDER</th>
-                                        <th>ROLE</th>
+                                        <th>DESCRIPTION</th>
                                         <th>IMAGE</th>
-                                        <th>LOCATION</th>
-                                        <th>RATING</th>
                                         <th>ACTIONS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {staffList.length > 0 ? (
-                                        staffList.map((staff, index) => (
+                                    {subCategories.length > 0 ? (
+                                        subCategories.map((subCategory, index) => (
                                             <tr
-                                                key={staff.STAFF_ID}
-                                                onClick={() => handleRowClick(staff.STAFF_ID)}
+                                                key={subCategory.SUB_CATEGORY_ID}
+                                                onClick={() => handleRowClick(subCategory.SUB_CATEGORY_ID)}
                                                 className="clickable-row"
                                             >
-                                                <td>{staff.NAME}</td>
-                                                <td>{staff.EMAIL}</td>
-                                                <td>{staff.PHONE}</td>
-                                                <td>{staff.ADDRESS}</td>
-                                                <td>{staff.GENDER}</td>
-                                                <td>{staff.ROLE}</td>
-
+                                                <td>{index + 1}</td>
+                                                <td>{subCategory.CATEGORY_ID}</td>
+                                                <td>{subCategory.NAME}</td>
+                                                <td>{subCategory.DESCRIPTION}</td>
                                                 <td>
-                                                    {staff.IMAGE ? (
+                                                    {subCategory.IMAGE ? (
                                                         <img
-                                                            src={`data:image/jpeg;base64,${staff.IMAGE}`}
-                                                            alt={staff.NAME}
-                                                            style={{width: "100px"}}
-                                                            className="staff-image"
+                                                            src={`data:image/jpeg;base64,${subCategory.IMAGE}`}
+                                                            alt={subCategory.NAME}
+                                                            className="subCategory-image"
                                                         />
                                                     ) : (
                                                         'No Image'
                                                     )}
                                                 </td>
-
-                                                <td>{staff.LOCATION_ID}</td>
-                                                <td>{staff.RATING}</td>
                                                 <td>
                                                     <button
                                                         className="edit-btn"
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            navigate(`/admin/staff/edit/${staff.STAFF_ID}`);
+                                                            navigate(`/admin/subCategory/edit/${subCategory.SUB_CATEGORY_ID}`);
                                                         }}
                                                     >
                                                         Sửa
@@ -126,7 +120,7 @@ const StaffList = () => {
                                                         className="delete-btn"
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            handleDeleteClick(staff);
+                                                            handleDeleteClick(subCategory);
                                                         }}
                                                     >
                                                         Xóa
@@ -136,7 +130,7 @@ const StaffList = () => {
                                         ))
                                     ) : (
                                         <tr>
-                                            <td colSpan="7">Không có dịch vụ nào!</td>
+                                            <td colSpan="7">Không có danh mục nào!</td>
                                         </tr>
                                     )}
                                 </tbody>
@@ -149,7 +143,7 @@ const StaffList = () => {
                             <div className="modal-content">
                                 <h2 className="modal-title">Xác nhận xóa</h2>
                                 <p className="modal-warning">
-                                    Bạn có chắc chắn muốn xóa nhân viên: <strong>{staffToDelete.NAME}</strong>?
+                                    Bạn có chắc chắn muốn xóa danh mục: <strong>{subCategoryToDelete.NAME}</strong>?
                                 </p>
                                 <div className="modal-actions">
                                     <button className="cancel-btn" onClick={() => setIsModalOpen(false)}>
@@ -162,10 +156,11 @@ const StaffList = () => {
                             </div>
                         </Modal>
                     )}
+
                 </div>
             </div>
         </>
     );
 };
 
-export default StaffList;
+export default SubCategoryList;

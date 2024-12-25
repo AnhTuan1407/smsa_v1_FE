@@ -22,7 +22,7 @@ const ServiceList = () => {
                     console.error('Không thể tải danh sách dịch vụ');
                 }
             } catch (error) {
-                console.error('Lỗi khi lấy danh sách dịch vụ:', error.message);
+                toast.error('Lỗi khi lấy danh sách dịch vụ:' + error.message);
             }
         };
 

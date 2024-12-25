@@ -17,8 +17,8 @@ const CategoryList = () => {
         const fetchData = async () => {
             try {
                 const result = await categoryService.findAll();
-                if (result) {
-                    setCategories(result);
+                if (result.success) {
+                    setCategories(result.data);
                 } else {
                     console.error('Không thể tải danh sách danh mục!');
                 }
