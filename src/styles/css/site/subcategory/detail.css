@@ -1,0 +1,123 @@
+#wp-hair-cut {
+    font-family: "Segoe UI", sans-serif;
+    width: 960px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+#wp-hair-cut>.hair-cut-title>.title {
+    font-weight: 700;
+    font-size: 28px;
+    color: #15397F;
+    text-transform: uppercase;
+    padding-left: 9px;
+    position: relative;
+}
+
+#wp-hair-cut>.hair-cut-title>.title::after {
+    content: "";
+    width: 5px;
+    height: 22px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    background-color: #a0c9eb;
+}
+
+#wp-hair-cut>.hair-cut-title>.sub-title {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #15397f;
+}
+
+
+.hair-cut-list>ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hair-cut-list>ul>li {
+    flex-basis: 33.33%;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.hair-cut-list>ul>li>.hair-cut-item {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.hair-cut-list>ul>li>.hair-cut-item>.content {
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.hair-cut-item>.content>.item-info>.title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.hair-cut-item>.content>.item-info>.sub-title {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 28px;
+}
+
+.hair-cut-item>.content>.item-img {
+    background-color: #A0C9EB;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.hair-cut-item>.content>.item-img img {
+    border-radius: 10px;
+}
+
+.hair-cut-item>.content>.item-description {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.hair-cut-item>.content>.item-description>.time-estimate {
+    flex-basis: 30%;
+    border-radius: 20px;
+    border: 2px solid rgba(21 57 127);
+    text-align: center;
+}
+
+.hair-cut-item>.content>.item-description>.more {
+    flex-basis: 40%;
+    font-size: 14px;
+    color: #15397F;
+    text-align: center;
+}
+
+#wp-hair-cut>.btn-booking {
+    display: flex;
+    justify-content: space-around;
+}
+
+#wp-hair-cut>.btn-booking a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#wp-hair-cut>.btn-booking>.content {
+    text-decoration: none;
+    flex-basis: 400px;
+    background-color: #15397F;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+}

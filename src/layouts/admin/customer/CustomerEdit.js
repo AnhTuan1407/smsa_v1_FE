@@ -54,7 +54,8 @@ const CustomerEdit = () => {
                                     name: Yup.string()
                                         .required("Tên khách hàng không được để trống!")
                                         .min(2, "Tên khách hàng phải có ít nhất 2 ký tự!")
-                                        .max(50, "Tên khách hàng không được vượt quá 50 ký tự!"),
+                                        .max(50, "Tên khách hàng không được vượt quá 50 ký tự!")
+                                        .matches(/^[\p{L}\s]+$/u, "Staff name must not contain special characters!"),
 
                                     email: Yup.string()
                                         .required("Email không được để trống!")

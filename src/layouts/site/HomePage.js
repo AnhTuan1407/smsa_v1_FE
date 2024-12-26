@@ -1,12 +1,62 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/css/site/home/home-banner.css';
 import '../../styles/css/site/home/home.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css';
+import * as categoryService from '../../services/admin/CategoryService';
+import * as subCategoryService from '../../services/admin/SubCategory';
+import * as service from '../../services/admin/Service';
+import { toast } from 'react-toastify';
 
 const HomePage = () => {
-    useEffect(() => {
 
+    const [categories, setCategories] = useState([]);
+    const [subCategories, setSubCategories] = useState([]);
+    const [services, setServices] = useState([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await categoryService.findAll();
+                if (response.success) {
+                    setCategories(response.data);
+                } else {
+                    console.error('Unable to load category list!');
+                }
+            } catch (error) {
+                toast.error("Error loading category list: " + error.message);
+            }
+        };
+
+        const fetchSubCategories = async () => {
+            try {
+                const response = await subCategoryService.findAll();
+                if (response.success) {
+                    setSubCategories(response.data);
+                } else {
+                    console.error('Unable to load subcategory list!');
+                }
+            } catch (error) {
+                toast.error("Error loading subcategory list: " + error.message);
+            }
+        };
+
+        const fetchServices = async () => {
+            try {
+                const response = await service.findAll();
+                if (response.success) {
+                    setServices(response.data);
+                } else {
+                    console.error('Unable to load service list!');
+                }
+            } catch (error) {
+                toast.error('Error loading service list: ' + error.message);
+            }
+        };
+
+        fetchCategories();
+        fetchSubCategories();
+        fetchServices();
     }, []);
 
     return (
@@ -95,110 +145,58 @@ const HomePage = () => {
                         </div>
                         <div className="slogan-text">Cắt xong trả tiền, hủy lịch không sao</div>
                     </div>
-                    <div className="btn-booking">
-                        <a href="#">ĐẶT LỊCH NGAY</a>
+                    <div className="btn-booking-home">
+                        <a href="/booking">ĐẶT LỊCH NGAY</a>
                     </div>
                 </div>
             </div>
 
             <div id="wp-service">
-                <div className="service-content">
-                    <div className="category-title">
-                        DỊCH VỤ TÓC
-                    </div>
+                {categories.map((category) => (
+                    <div className="service-content" key={category.CATEGORY_ID}>
+                        <div className="category-title">{category.NAME}</div>
 
-                    <div className="service-list">
-                        <ul>
-                            <li>
-                                <div className="service-item">
-                                    <div className="service-img">
-                                        <a href="/api/client/service/detail"><img src="/images/uon-1.jpg" alt="" /></a>
-                                    </div>
-                                    <div className="service-info">
-                                        <div className="service-label">
-                                            <a href="">Cắt tóc</a>
-                                        </div>
-                                        <div className="service-description">
-                                            <a href="">Tìm hiểu thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="service-item">
-                                    <div className="service-img">
-                                        <a href=""><img src="/images/uon-2.jpg" alt="" /></a>
-                                    </div>
-                                    <div className="service-info">
-                                        <div className="service-label">
-                                            <a href="">Uốn định hình</a>
-                                        </div>
-                                        <div className="service-description">
-                                            <a href="">Tìm hiểu thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="service-item">
-                                    <div className="service-img">
-                                        <a href=""><img src="/images/uon-3.jpg" alt="" /></a>
-                                    </div>
-                                    <div className="service-info">
-                                        <div className="service-label">
-                                            <a href="">Thay đổi màu tóc</a>
-                                        </div>
-                                        <div className="service-description">
-                                            <a href="">Tìm hiểu thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                        <div className="service-list">
+                            <ul>
+                                {subCategories
+                                    .filter((subCategory) => subCategory.CATEGORY_ID === category.CATEGORY_ID)
+                                    .map((subCategory) => (
+                                        <li key={subCategory.SUB_CATEGORY_ID}>
+                                            <div className="service-item">
+                                                <div className="service-img">
+                                                    <a href={`/client/subCategory/detail/${subCategory.SUB_CATEGORY_ID}`}>
+                                                        {subCategory.IMAGE ? (
+                                                            <img
+                                                                src={`data:image/jpeg;base64,${subCategory.IMAGE}`}
+                                                                alt={subCategory.NAME}
+                                                                className="service-image"
+                                                            />
+                                                        ) : (
+                                                            'No Image'
+                                                        )}
+                                                    </a>
+                                                </div>
+                                                <div className="service-info">
+                                                    <div className="service-label">
+                                                        <a href={`/client/subCategory/detail/${subCategory.SUB_CATEGORY_ID}`}>
+                                                            {subCategory.NAME}
+                                                        </a>
+                                                    </div>
+                                                    <div className="service-description">
+                                                        <a href={`/client/subCategory/detail/${subCategory.SUB_CATEGORY_ID}`}>
+                                                            Tìm hiểu thêm
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-
-                <div className="service-content">
-                    <div className="category-title">
-                        SPA & RELAX
-                    </div>
-
-                    <div className="service-list">
-                        <ul>
-                            <li>
-                                <div className="service-item">
-                                    <div className="service-img">
-                                        <a href=""><img src="/images/pc_home_spa_1.png" alt="" /></a>
-                                    </div>
-                                    <div className="service-info">
-                                        <div className="service-label">
-                                            <a href="">Gội Massage Relax</a>
-                                        </div>
-                                        <div className="service-description">
-                                            <a href="">Tìm hiểu thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="service-item">
-                                    <div className="service-img">
-                                        <a href=""><img src="/images/pc_home_spa_3.png" alt="" /></a>
-                                    </div>
-                                    <div className="service-info">
-                                        <div className="service-label">
-                                            <a href="">Lấy ráy tai êm</a>
-                                        </div>
-                                        <div className="service-description">
-                                            <a href="">Tìm hiểu thêm</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                ))}
             </div>
+
 
             <div id="wp-loyalty">
                 <div className="loyalty-content">

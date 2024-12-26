@@ -1,4 +1,3 @@
-
 #wp-home {
     margin-top: 15px;
     margin-bottom: 30px;
@@ -35,7 +34,7 @@
     font-size: 20px;
 }
 
-.btn-booking {
+.btn-booking-home {
     padding: 10px;
     margin-top: 10px;
     background: linear-gradient(86deg, #afd2f1 11.93%, #fdfdfd 41.38%, #efdfec 55.91%, #afd2f1 89.39%);
@@ -48,8 +47,9 @@
 
 }
 
-.btn-booking a {
+.btn-booking-home a {
     text-decoration: none;
+    color: black;
 }
 
 /* Service list */
@@ -113,6 +113,7 @@
 
 .service-item>.service-img img {
     width: 100%;
+    height: 275px;
     border-radius: 15px;
     transition: transform 0.3s ease;
 }

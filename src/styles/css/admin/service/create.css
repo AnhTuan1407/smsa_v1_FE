@@ -2,7 +2,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background: #fff;
+    background: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -43,8 +43,7 @@ label {
     font-size: 1.2rem;
     color: red;
     margin-top: 5px;
-    display: inline-block;
-    width: 500px;
+    display: block;
 }
 
 .btn-submit {
@@ -62,4 +61,17 @@ label {
 
 .btn-submit:hover {
     background-color: #0056b3;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+.color-ring-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

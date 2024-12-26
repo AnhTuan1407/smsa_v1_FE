@@ -2,29 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import "../../../styles/css/admin/service/edit.css";
-import * as service from '../../../services/admin/Service';
+// import "../../../styles/css/admin/service/edit.css";
+import * as categoryService from '../../../services/admin/CategoryService';
 import * as subCategoryService from '../../../services/admin/SubCategory';
 import { ToastContainer, toast } from 'react-toastify';
 import { ColorRing } from 'react-loader-spinner';
 
-const ServiceEdit = () => {
+const SubCategoryEdit = () => {
     const { id } = useParams(); // Lấy ID từ URL
     const navigate = useNavigate();
 
-    const [subCategories, setSubCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [initialValues, setInitialValues] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
 
-    // Lấy dữ liệu subCategory và thông tin service theo ID
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Lấy danh sách subCategory
                 try {
-                    const subCategoryResponse = await subCategoryService.findAll();
-                    if (subCategoryResponse.success) {
-                        setSubCategories(subCategoryResponse.data);
+                    const categoryResponse = await categoryService.findAll();
+                    if (categoryResponse.success) {
+                        setCategories(categoryResponse.data);
                     } else {
                         console.error('Không thể tải danh sách danh mục!');
                     }
@@ -33,21 +31,19 @@ const ServiceEdit = () => {
                 }
 
                 // Lấy thông tin service theo ID
-                const serviceResponse = await service.findById(id);
+                const subCategoryResponse = await subCategoryService.findById(id);
 
                 setInitialValues({
-                    name: serviceResponse.NAME,
-                    description: serviceResponse.DESCRIPTION,
-                    subCategoryId: serviceResponse.SUB_CATEGORY_ID,
-                    price: serviceResponse.PRICE,
-                    estimateTime: serviceResponse.ESTIMATE_TIME,
+                    name: subCategoryResponse.NAME,
+                    description: subCategoryResponse.DESCRIPTION,
+                    categoryId: subCategoryResponse.CATEGORY_ID,
                     image: "",
                 });
-                setImagePreview(`data:image/jpeg;base64,${serviceResponse.IMAGE}`); // Hiển thị ảnh từ base64
+                setImagePreview(`data:image/jpeg;base64,${subCategoryResponse.IMAGE}`); // Hiển thị ảnh từ base64
 
             } catch (error) {
                 toast.error("Có lỗi xảy ra: " + error.message);
-                navigate('/admin/services/list');
+                navigate('/admin/subCategory/list');
             }
         };
 
@@ -57,19 +53,13 @@ const ServiceEdit = () => {
     // Schema validate với Yup
     const validationSchema = Yup.object({
         name: Yup.string()
-            .required("Tên dịch vụ không được để trống!")
-            .min(3, "Tên dịch vụ phải có ít nhất 3 ký tự!")
-            .matches(/^[\p{L}\p{N}\s]+$/u, "Service name must only contain letters, numbers, and spaces!"),
+            .required("Subcategory name is required!")
+            .min(3, "Subcategory name must be at least 3 characters long!")
+            .matches(/^[\p{L}\s]+$/u, "Subcategory name must not contain special characters!"),
         description: Yup.string()
-            .required("Mô tả không được để trống!")
-            .min(10, "Mô tả phải có ít nhất 10 ký tự!"),
-        subCategoryId: Yup.string().required("Vui lòng chọn danh mục phụ!"),
-        price: Yup.number()
-            .required("Giá không được để trống!")
-            .min(0, "Giá phải là số dương!"),
-        estimateTime: Yup.number()
-            .required("Thời gian ước tính không được để trống!")
-            .min(0, "Thời gian ước tính phải là số dương!"),
+            .required("Description is required!")
+            .min(10, "Description must be at least 10 characters long!"),
+        categoryId: Yup.string().required("Please select a Category!"),
         image: Yup.mixed()
             .test(
                 "fileFormat",
@@ -109,7 +99,7 @@ const ServiceEdit = () => {
 
     return (
         <div id="wp-service-edit">
-            <h1 className="form-title">Chỉnh Sửa Dịch Vụ</h1>
+            <h1 className="form-title">Edit SubCategory</h1>
             <Formik
                 initialValues={initialValues}
 
@@ -120,18 +110,16 @@ const ServiceEdit = () => {
                     const formData = new FormData();
                     formData.append("name", values.name);
                     formData.append("description", values.description);
-                    formData.append("subCategoryId", values.subCategoryId);
-                    formData.append("price", values.price);
-                    formData.append("estimateTime", values.estimateTime);
+                    formData.append("categoryId", values.categoryId);
                     formData.append("image", values.image);
 
                     try {
-                        const result = await service.update(id, formData);
+                        const result = await subCategoryService.edit(formData, id);
                         if (result.success) {
-                            toast.success('Cập nhật dịch vụ thành công!');
-                            navigate('/admin/services/list');
+                            toast.success('Cập nhật danh mục thành công!');
+                            navigate('/admin/subCategory/list');
                         } else {
-                            toast.error('Không thể cập nhật dịch vụ!');
+                            toast.error('Không thể cập nhật danh mục!');
                         }
                     } catch (error) {
                         toast.error('Có lỗi xảy ra: ' + error.message);
@@ -142,7 +130,7 @@ const ServiceEdit = () => {
                 {({ isSubmitting, setFieldValue }) => (
                     <Form className="form">
                         <div className="form-group">
-                            <label htmlFor="name">Tên Dịch Vụ</label>
+                            <label htmlFor="name">Tên Danh mục</label>
                             <Field name="name" type="text" className="form-input" />
                             <ErrorMessage name="name" component="div" className="error" />
                         </div>
@@ -154,29 +142,18 @@ const ServiceEdit = () => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="subCategoryId">Danh Mục Phụ</label>
-                            <Field as="select" name="subCategoryId" className="form-input">
-                                <option value="">-- Chọn danh mục phụ --</option>
-                                {subCategories.map((subCategory) => (
-                                    <option key={subCategory.SUB_CATEGORY_ID} value={subCategory.SUB_CATEGORY_ID}>
-                                        {subCategory.NAME}
+                            <label htmlFor="categoryId">Loại</label>
+                            <Field as="select" name="categoryId" className="form-input">
+                                <option value="">-- Chọn loại --</option>
+                                {categories.map((category) => (
+                                    <option key={category.CATEGORY_ID} value={category.CATEGORY_ID}>
+                                        {category.NAME}
                                     </option>
                                 ))}
                             </Field>
-                            <ErrorMessage name="subCategoryId" component="div" className="error" />
+                            <ErrorMessage name="categoryId" component="div" className="error" />
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="estimateTime">Thời gian ước tính</label>
-                            <Field name="estimateTime" type="number" className="form-input" />
-                            <ErrorMessage name="estimateTime" component="div" className="error" />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="price">Giá</label>
-                            <Field name="price" type="number" className="form-input" />
-                            <ErrorMessage name="price" component="div" className="error" />
-                        </div>
 
                         <div className="form-group">
                             <label htmlFor="image">Hình Ảnh</label>
@@ -203,7 +180,7 @@ const ServiceEdit = () => {
                                 />
                             ) : (
                                 <button type="submit" className="login-btn">
-                                    Cập Nhật Dịch Vụ
+                                    Cập Nhật Danh Mục
                                 </button>
                             )}
                         </div>
@@ -212,7 +189,7 @@ const ServiceEdit = () => {
             </Formik>
 
             <div>
-                <button onClick={() => navigate("/admin/services/list")}>
+                <button onClick={() => navigate("/admin/subCategory/list")}>
                     Quay lại
                 </button>
             </div>
@@ -220,4 +197,4 @@ const ServiceEdit = () => {
     );
 };
 
-export default ServiceEdit;
+export default SubCategoryEdit;

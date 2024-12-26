@@ -10,30 +10,28 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
+    // const [isDropdownVisible, setDropdownVisible] = useState(false);
 
-    const toggleDropdown = () => {
-        setDropdownVisible(!isDropdownVisible);
-    };
+    // const toggleDropdown = () => {
+    //     setDropdownVisible(!isDropdownVisible);
+    // };
 
-    const dropdownRef = React.useRef(null);
-    const userInfoRef = React.useRef(null);
+    // const dropdownRef = React.useRef(null);
+    // const userInfoRef = React.useRef(null);
 
-    const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-            userInfoRef.current && !userInfoRef.current.contains(event.target)) {
-            setDropdownVisible(false);
-        }
-    };
+    // const handleClickOutside = (event) => {
+    //     if (dropdownRef.current && !dropdownRef.current.contains(event.target) &&
+    //         userInfoRef.current && !userInfoRef.current.contains(event.target)) {
+    //         setDropdownVisible(false);
+    //     }
+    // };
 
-    React.useEffect(() => {
-        document.addEventListener('click', handleClickOutside);
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, []);
-
-
+    // React.useEffect(() => {
+    //     document.addEventListener('click', handleClickOutside);
+    //     return () => {
+    //         document.removeEventListener('click', handleClickOutside);
+    //     };
+    // }, []);
 
     return (
         <>
@@ -64,34 +62,56 @@ const Header = () => {
                             </>
                         ) : (
                             <>
-                                <div className="auth-item-3"><a href="#" onClick={logout}>Đăng xuất</a></div>
-                                <div className="user-info" onClick={toggleDropdown} ref={userInfoRef}>
-                                    <img
-                                        src="/images/user-avatar-reloaded.png"
-                                        alt="Loading"
-                                        className="avt-user"
-                                    />
-                                    {user.username && (
-                                        <span className='username'>{user.username}</span>
-                                    )}
-                                </div>
+                                <div className="auth-item-3"><a href="#" onClick={logout}>Logout</a></div>
+
+                                <li className="nav-item dropdown no-arrow user-info">
+                                    <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img
+                                            src="/images/user-avatar-reloaded.png"
+                                            alt="Loading"
+                                            className="avt-user"
+                                        />
+                                        {user.username && (
+                                            <span className='username'>{" " + user.username}</span>
+                                        )}
+                                    </a>
+                                    {/* Dropdown - User Information */}
+                                    <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                        aria-labelledby="userDropdown">
+                                        {user.role === "Customer" && (
+                                            <a className="dropdown-item" href="/profile">
+                                                <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Profile
+                                            </a>
+                                        )}
+                                        {user.role === "Staff" && (
+                                            <a className="dropdown-item" href="/staff-home">
+                                                <i className="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Staff Homepage
+                                            </a>
+                                        )}
+                                        {user.role === "Admin" && (
+                                            <a className="dropdown-item" href="/admin">
+                                                <i className="fas fa-tachometer-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Dashboard
+                                            </a>
+                                        )}
+                                        <div className="dropdown-divider"></div>
+                                        <a className="dropdown-item" href="#" onClick={logout}>
+                                            <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Logout
+                                        </a>
+                                    </div>
+                                </li>
                             </>
                         )}
                     </div>
-
-                    {isDropdownVisible && (
-                        <div className="dropdown-menu" id="dropdownMenu" ref={dropdownRef}>
-                            <a href="#">Trang cá nhân</a>
-                            <a href="#">Thay đổi mật khẩu</a>
-                            <a href="#">Đặt lịch cắt tóc</a>
-                            <a href="#" onClick={logout}>Đăng xuất</a>
-                        </div>
-                    )}
-
                 </div>
             </div>
         </>
     );
+
 };
 
 export default Header;

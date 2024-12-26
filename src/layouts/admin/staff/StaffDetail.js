@@ -4,14 +4,11 @@ import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
-
+import '../../../styles/css/admin/staff/detail.css';
 
 const StaffDetail = () => {
-
     const navigate = useNavigate();
-
     const { id } = useParams();
-
     const [staffData, setStaffData] = useState(null);
 
     useEffect(() => {
@@ -21,16 +18,16 @@ const StaffDetail = () => {
                 if (response) {
                     setStaffData(response);
                 } else {
-                    toast.error("Không tìm thấy nhân viên này!");
+                    toast.error("Staff not found!");
                     navigate('/admin/staff/list');
                 }
             } catch (error) {
-                toast.error("Không thể tải dữ liệu! " + error.message);
+                toast.error("Unable to load data! " + error.message);
             }
         };
 
         fetchData();
-    }, [id])
+    }, [id]);
 
     if (!staffData) {
         return (
@@ -47,72 +44,70 @@ const StaffDetail = () => {
             </div>
         );
     }
-    return (
 
-        <>
-            <div id="wp-staff-detail">
-                <div className="staff-detail-container">
-                    <div className="title">
-                        THÔNG TIN CHI TIẾT NHÂN VIÊN
+    return (
+        <div className="staff-detail-wrapper">
+            <div className="staff-detail-container">
+                <div className="staff-title">
+                    STAFF DETAIL INFORMATION
+                </div>
+
+                <div className="staff-info">
+                    <div className="info-row">
+                        <label className="info-label">NAME</label>
+                        <span className="info-value">{staffData.NAME}</span>
                     </div>
 
-                    <div className="content">
-                        <div>
-                            <label>NAME</label>
-                            {staffData.NAME}
-                        </div>
+                    <div className="info-row">
+                        <label className="info-label">EMAIL</label>
+                        <span className="info-value">{staffData.EMAIL}</span>
+                    </div>
 
-                        <div>
-                            <label>EMAIL</label>
-                            {staffData.EMAIL}
-                        </div>
+                    <div className="info-row">
+                        <label className="info-label">GENDER</label>
+                        <span className="info-value">{staffData.GENDER}</span>
+                    </div>
 
-                        <div>
-                            <label>GENDER</label>
-                            {staffData.GENDER}
-                        </div>
+                    <div className="info-row">
+                        <label className="info-label">PHONE</label>
+                        <span className="info-value">{staffData.PHONE}</span>
+                    </div>
 
-                        <div>
-                            <label>PHONE</label>
-                            {staffData.PHONE}
-                        </div>
+                    <div className="info-row">
+                        <label className="info-label">ADDRESS</label>
+                        <span className="info-value">{staffData.ADDRESS}</span>
+                    </div>
 
-                        <div>
-                            <label>ADDRESS</label>
-                            {staffData.ADDRESS}
-                        </div>
+                    <div className="info-row">
+                        <label className="info-label">ROLE</label>
+                        <span className="info-value">{staffData.ROLE}</span>
+                    </div>
 
-                        <div>
-                            <label>ROLE</label>
-                            {staffData.ROLE}
-                        </div>
+                    <div className="info-row">
+                        <label className="info-label">RATING</label>
+                        <span className="info-value">{staffData.RATING}</span>
+                    </div>
 
-                        <div>
-                            <label>RATING</label>
-                            {staffData.RATING}
-                        </div>
+                    <div className="info-row">
+                        <label className="info-label">LOCATION ID</label>
+                        <span className="info-value">{staffData.LOCATION_ID}</span>
+                    </div>
 
-                        <div>
-                            <label>LOCATION_ID</label>
-                            {staffData.LOCATION_ID}
-                        </div>
-
-                        <div>
-                            <label>IMAGE</label>
-                            {staffData.IMAGE ? (
-                                <img
-                                    src={`data:image/jpeg;base64,${staffData.IMAGE}`}
-                                    alt={staffData.NAME}
-                                    className="staff-image"
-                                />
-                            ) : (
-                                'No Image'
-                            )}
-                        </div>
+                    <div className="info-row">
+                        <label className="info-label">IMAGE</label>
+                        {staffData.IMAGE ? (
+                            <img
+                                src={`data:image/jpeg;base64,${staffData.IMAGE}`}
+                                alt={staffData.NAME}
+                                className="staff-image"
+                            />
+                        ) : (
+                            <span>No Image</span>
+                        )}
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

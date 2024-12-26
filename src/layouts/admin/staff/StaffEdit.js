@@ -75,7 +75,7 @@ const StaffEdit = () => {
                                 validationSchema={Yup.object({
                                     name: Yup.string()
                                         .required("Staff name is required!")
-                                        .matches(/^[a-zA-Z\s]+$/, "Staff name must not contain special characters!")
+                                        .matches(/^[\p{L}\s]+$/u, "Staff name must not contain special characters!")
                                         .min(2, "Staff name must be at least 2 characters!")
                                         .max(50, "Staff name must not exceed 50 characters!"),
 

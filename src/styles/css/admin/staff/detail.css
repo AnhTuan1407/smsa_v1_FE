@@ -1,0 +1,123 @@
+/* General Styles */
+.staff-detail-wrapper {
+    padding: 40px 20px;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+}
+
+.staff-detail-container {
+    max-width: 900px;
+    width: 100%;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.staff-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.staff-info {
+    font-size: 1.6rem;
+    color: #444;
+}
+
+.info-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #555;
+    width: 30%;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.info-value {
+    font-size: 1.6rem;
+    color: #333;
+    word-wrap: break-word;
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.staff-image {
+    max-width: 200px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Loader Style */
+.loading-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.color-ring-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .staff-detail-container {
+        padding: 20px;
+    }
+
+    .staff-title {
+        font-size: 2rem;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-label {
+        width: auto;
+        margin-right: 0;
+    }
+
+    .info-value {
+        width: auto;
+    }
+
+    .staff-image {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .staff-detail-container {
+        padding: 15px;
+    }
+
+    .staff-title {
+        font-size: 1.8rem;
+    }
+
+    .staff-info {
+        font-size: 1.4rem;
+    }
+
+    .staff-image {
+        max-width: 130px;
+    }
+}

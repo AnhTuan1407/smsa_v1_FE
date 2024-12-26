@@ -1,0 +1,107 @@
+/* hair cut detail */
+
+#wp-hair-cut-detail {
+    width: 960px;
+    margin: 0 auto;
+    margin-top: 55px;
+    margin-bottom: 55px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.hc-detailc-content>.title {
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    background-color: rgb(21 57 127);
+    padding: 10px 20px;
+    margin-bottom: 40px;
+    border-radius: 30px;
+    display: inline-block;
+}
+
+.hc-detailc-content>.hc-detail-banner {
+    margin-bottom: 40px;
+}
+
+.hc-detailc-content>.hc-detail-banner img {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.hc-detail-steps>.title {
+    font-weight: 700;
+    font-size: 28px;
+    color: #15397F;
+    text-transform: uppercase;
+    padding-left: 9px;
+    position: relative;
+}
+
+.hc-detail-steps>.title::after {
+    content: "";
+    width: 5px;
+    height: 22px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    background-color: #a0c9eb;
+}
+
+.hc-detail-steps>.sub-title {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #15397f;
+}
+
+.hc-detail-steps>.steps-list>ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.hc-detail-steps>.steps-list>ul>li {
+    flex-basis: 20%;
+    /* padding-left: 10px;
+    padding-right: 10px; */
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.hc-detail-steps>.steps-list>ul>li>.step-item>.step-img img {
+    border-radius: 10px;
+}
+
+.hc-detail-steps>.steps-list>ul>li>.step-item>.step-description {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #15397f;
+    margin-top: 10px;
+}
+
+.btn-booking {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-booking a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.btn-booking>.content {
+    text-decoration: none;
+    flex-basis: 400px;
+    background-color: #15397F;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 10px;
+}

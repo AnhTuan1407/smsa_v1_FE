@@ -2,50 +2,45 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import "../../../styles/css/admin/service/create.css";
-import * as service from '../../../services/admin/Service';
+// import "../../../styles/css/admin/service/create.css";
+import * as categoryService from '../../../services/admin/CategoryService';
 import * as subCategoryService from '../../../services/admin/SubCategory';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
 
-const ServiceCreate = () => {
+const SubCategoryCreate = () => {
     const navigate = useNavigate();
 
-    const [subCategories, setSubCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        const fetchSubCategories = async () => {
+        const fetchData = async () => {
             try {
-                const response = await subCategoryService.findAll();
+                const response = await categoryService.findAll();
                 if (response.success) {
-                    setSubCategories(response.data); // Store list of subCategories
+                    setCategories(response.data); // Store list of Categories
                 } else {
-                    console.error('Unable to load SubCategory list!');
+                    console.error('Unable to load Category list!');
                 }
             } catch (error) {
-                toast.error('Error loading SubCategory list: ' + error.message);
+                toast.error('Error loading Category list: ' + error.message);
             }
         };
-        fetchSubCategories();
+
+        fetchData();
     }, []);
 
     // Validation schema using Yup
     const validationSchema = Yup.object({
         name: Yup.string()
-            .required("Service name is required!")
-            .min(3, "Service name must be at least 3 characters long!")
-            .matches(/^[\p{L}\p{N}\s]+$/u, "Service name must only contain letters, numbers, and spaces!"),
+            .required("Subcategory name is required!")
+            .min(3, "Subcategory name must be at least 3 characters long!")
+            .matches(/^[\p{L}\s]+$/u, "Subcategory name must not contain special characters!"),
         description: Yup.string()
             .required("Description is required!")
             .min(10, "Description must be at least 10 characters long!"),
-        subCategoryId: Yup.string().required("Please select a subcategory!"),
-        price: Yup.number()
-            .required("Price is required!")
-            .min(0, "Price must be a positive number!"),
-        estimateTime: Yup.number()
-            .required("Estimate time is required!")
-            .min(0, "Estimate time must be a positive number!"),
+        categoryId: Yup.string().required("Please select a Category!"),
         image: Yup.mixed()
             .required("Please upload an image!")
             .test(
@@ -57,14 +52,12 @@ const ServiceCreate = () => {
 
     return (
         <div className="service-create">
-            <h1 className="form-title">Create New Service</h1>
+            <h1 className="form-title">Create New SubCategory</h1>
             <Formik
                 initialValues={{
                     name: "",
                     description: "",
-                    subCategoryId: "",
-                    estimateTime: null,
-                    price: "",
+                    categoryId: "",
                     image: null,
                 }}
 
@@ -74,19 +67,17 @@ const ServiceCreate = () => {
                     const formData = new FormData();
                     formData.append("name", values.name);
                     formData.append("description", values.description);
-                    formData.append("subCategoryId", values.subCategoryId);
-                    formData.append("price", values.price);
-                    formData.append("estimateTime", values.estimateTime);
+                    formData.append("categoryId", values.categoryId);
                     formData.append("image", values.image);
 
                     try {
-                        const result = await service.create(formData);
+                        const result = await subCategoryService.create(formData);
 
                         if (result.success) {
-                            toast.success('Service created successfully!');
-                            navigate('/admin/services/list');
+                            toast.success('SubCategory created successfully!');
+                            navigate('/admin/subCategory/list');
                         } else {
-                            toast.error('Failed to create service!');
+                            toast.error('Failed to create SubCategory!');
                         }
                     } catch (error) {
                         toast.error('An error occurred: ' + error.message);
@@ -98,7 +89,7 @@ const ServiceCreate = () => {
                 {({ setFieldValue, isSubmitting }) => (
                     <Form className="form">
                         <div className="form-group">
-                            <label htmlFor="name">Service Name</label>
+                            <label htmlFor="name">SubCategory Name</label>
                             <Field name="name" type="text" className="form-input" />
                             <ErrorMessage name="name" component="div" className="error" />
                         </div>
@@ -110,28 +101,16 @@ const ServiceCreate = () => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="subCategoryId">Subcategory</label>
-                            <Field as="select" name="subCategoryId" className="form-input">
-                                <option value="">-- Select subcategory --</option>
-                                {subCategories.map((subCategory) => (
-                                    <option key={subCategory.SUB_CATEGORY_ID} value={subCategory.SUB_CATEGORY_ID}>
-                                        {subCategory.NAME}
+                            <label htmlFor="categoryId">Category</label>
+                            <Field as="select" name="categoryId" className="form-input">
+                                <option value="">-- Select category --</option>
+                                {categories.map((category) => (
+                                    <option key={category.CATEGORY_ID} value={category.CATEGORY_ID}>
+                                        {category.NAME}
                                     </option>
                                 ))}
                             </Field>
-                            <ErrorMessage name="subCategoryId" component="div" className="error" />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="estimateTime">Estimate Time (in minutes)</label>
-                            <Field name="estimateTime" type="number" className="form-input" />
-                            <ErrorMessage name="estimateTime" component="div" className="error" />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="price">Price</label>
-                            <Field name="price" type="number" className="form-input" />
-                            <ErrorMessage name="price" component="div" className="error" />
+                            <ErrorMessage name="categoryId" component="div" className="error" />
                         </div>
 
                         <div className="form-group">
@@ -163,7 +142,7 @@ const ServiceCreate = () => {
                                 </div>
                             ) : (
                                 <button type="submit" className="btn-submit">
-                                    Add Service
+                                    Add SubCategory
                                 </button>
                             )}
                         </div>
@@ -171,10 +150,10 @@ const ServiceCreate = () => {
                 )}
             </Formik>
 
-            <button onClick={() => navigate(`/admin/services/list`)}>Back to List</button>
+            <button onClick={() => navigate(`/admin/subCategory/list`)}>Back to List</button>
             <ToastContainer />
         </div>
     );
 };
 
-export default ServiceCreate;
+export default SubCategoryCreate;

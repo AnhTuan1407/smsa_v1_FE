@@ -1,8 +1,8 @@
-import * as staffService from "../../../services/admin/StaffService";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Modal from '../../../components/Modal';
+import * as staffService from "../../../services/admin/StaffService";
 
 const StaffList = () => {
     const navigate = useNavigate();
@@ -10,17 +10,24 @@ const StaffList = () => {
     const [staffList, setStaffList] = useState([]);
     const [staffToDelete, setStaffToDelete] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [staffPerPage, setStaffPerPage] = useState(5);
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await staffService.findAll();
-                setStaffList(response);
+                if (response) {
+                    setStaffList(response);
+                } else {
+                    console.error('Unable to load staff list!');
+                }
             } catch (error) {
-                toast.error("Lỗi khi lấy danh sách nhân viên: " + error.message);
+                toast.error("Error loading staff list: " + error.message);
             }
         };
-
         fetchData();
     }, []);
 
@@ -32,138 +39,225 @@ const StaffList = () => {
     const confirmDelete = async () => {
         try {
             const response = await staffService.deleteById(staffToDelete.STAFF_ID);
-
             if (response.success) {
-                setStaffToDelete((prev) => prev.filter((s) => s.STAFF_ID !== staffToDelete.STAFF_ID));
-                toast.success("Xóa nhân viên thành công!");
+                setStaffList((prev) =>
+                    prev.filter((s) => s.STAFF_ID !== staffToDelete.STAFF_ID)
+                );
+                toast.success("Staff deleted successfully!");
             } else {
-                toast.error("Xóa nhân viên không thành công!");
+                toast.error("Failed to delete staff!");
             }
         } catch (error) {
-            toast.error("Có lỗi xảy ra khi xóa nhân viên: ", error.message);
+            toast.error("Error deleting staff: " + error.message);
         } finally {
             setIsModalOpen(false);
-            staffToDelete(null);
+            setStaffToDelete(null);
         }
     };
 
     const handleRowClick = (id) => {
-        navigate(`/admin/staff/detail/${id}`)
-    }
+        navigate(`/admin/staff/detail/${id}`);
+    };
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSort = (key) => {
+        let direction = 'asc';
+        if (sortConfig.key === key && sortConfig.direction === 'asc') {
+            direction = 'desc';
+        }
+        setSortConfig({ key, direction });
+    };
+
+    const sortedStaff = [...staffList].sort((a, b) => {
+        if (!sortConfig.key) return 0;
+        const aValue = a[sortConfig.key];
+        const bValue = b[sortConfig.key];
+        if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+        return 0;
+    });
+
+    const filteredStaff = sortedStaff.filter((staff) =>
+        staff.NAME.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const indexOfLastStaff = currentPage * staffPerPage;
+    const indexOfFirstStaff = indexOfLastStaff - staffPerPage;
+    const currentStaff = filteredStaff.slice(indexOfFirstStaff, indexOfLastStaff);
+
+    const totalPages = Math.ceil(filteredStaff.length / staffPerPage);
 
     return (
         <>
-            <div id="wp-staff-list">
-                <div className="staff-list-container">
-                    <div className="title">
-                        STAFF LIST
+            <div className="container-fluid">
+
+                <h1 className="h3 mb-2 text-gray-800">STAFF MANAGEMENT</h1>
+
+                <div className="card shadow mb-4">
+
+                    <div className="card-header py-3">
+                        <h6 className="m-0 font-weight-bold text-primary">STAFF LIST</h6>
                     </div>
 
-                    <div className="content">
-                        <div className="table-container">
-                            <div>
-                                <button className='create-btn' onClick={() => navigate(`/admin/staff/create`)}>
-                                    Thêm mới nhân viên
-                                </button>
-                            </div>
+                    <div className="card-body">
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search staff..."
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
+                        </div>
 
-                            <table className='service-list-table'>
+                        <div className="table-responsive">
+                            <table className="table table-bordered" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>NAME</th>
-                                        <th>EMAIL</th>
-                                        <th>PHONE</th>
-                                        <th>ADDRESS</th>
-                                        <th>GENDER</th>
-                                        <th>ROLE</th>
-                                        <th>IMAGE</th>
-                                        <th>LOCATION</th>
-                                        <th>RATING</th>
-                                        <th>ACTIONS</th>
+                                        <th onClick={() => handleSort('STAFF_ID')}>ID</th>
+                                        <th onClick={() => handleSort('NAME')}>Name</th>
+                                        <th onClick={() => handleSort('EMAIL')}>Email</th>
+                                        <th onClick={() => handleSort('PHONE')}>Phone</th>
+                                        <th onClick={() => handleSort('ADDRESS')}>Address</th>
+                                        <th onClick={() => handleSort('ROLE')}>Role</th>
+                                        <th>Image</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
+
+                                <tfoot>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Role</th>
+                                        <th>Image</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </tfoot>
+
                                 <tbody>
-                                    {staffList.length > 0 ? (
-                                        staffList.map((staff, index) => (
+                                    {currentStaff.length > 0 ? (
+                                        currentStaff.map((staff, index) => (
                                             <tr
                                                 key={staff.STAFF_ID}
                                                 onClick={() => handleRowClick(staff.STAFF_ID)}
-                                                className="clickable-row"
                                             >
+                                                <td>{index + 1}</td>
                                                 <td>{staff.NAME}</td>
                                                 <td>{staff.EMAIL}</td>
                                                 <td>{staff.PHONE}</td>
                                                 <td>{staff.ADDRESS}</td>
-                                                <td>{staff.GENDER}</td>
                                                 <td>{staff.ROLE}</td>
-
                                                 <td>
                                                     {staff.IMAGE ? (
                                                         <img
                                                             src={`data:image/jpeg;base64,${staff.IMAGE}`}
                                                             alt={staff.NAME}
-                                                            style={{width: "100px"}}
                                                             className="staff-image"
+                                                        style={{width: "100px", height:"150px"}}
                                                         />
                                                     ) : (
                                                         'No Image'
                                                     )}
                                                 </td>
-
-                                                <td>{staff.LOCATION_ID}</td>
-                                                <td>{staff.RATING}</td>
                                                 <td>
                                                     <button
-                                                        className="edit-btn"
+                                                        className="btn btn-primary"
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             navigate(`/admin/staff/edit/${staff.STAFF_ID}`);
                                                         }}
                                                     >
-                                                        Sửa
+                                                        Edit
                                                     </button>
                                                     <button
-                                                        className="delete-btn"
+                                                        className="btn btn-danger"
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             handleDeleteClick(staff);
                                                         }}
                                                     >
-                                                        Xóa
+                                                        Delete
                                                     </button>
                                                 </td>
                                             </tr>
                                         ))
                                     ) : (
                                         <tr>
-                                            <td colSpan="7">Không có dịch vụ nào!</td>
+                                            <td colSpan="7">No staff found!</td>
                                         </tr>
                                     )}
                                 </tbody>
+
                             </table>
                         </div>
-                    </div>
 
-                    {isModalOpen && (
-                        <Modal>
-                            <div className="modal-content">
-                                <h2 className="modal-title">Xác nhận xóa</h2>
-                                <p className="modal-warning">
-                                    Bạn có chắc chắn muốn xóa nhân viên: <strong>{staffToDelete.NAME}</strong>?
-                                </p>
-                                <div className="modal-actions">
-                                    <button className="cancel-btn" onClick={() => setIsModalOpen(false)}>
-                                        Thoát
-                                    </button>
-                                    <button className="delete-confirm-btn" onClick={confirmDelete}>
-                                        Xóa
-                                    </button>
-                                </div>
+                        <div className="d-flex justify-content-between align-items-center mt-3">
+                            <div>
+                                Show
+                                <select
+                                    className="form-control d-inline-block w-auto mx-2"
+                                    value={staffPerPage}
+                                    onChange={(e) => setStaffPerPage(parseInt(e.target.value))}
+                                >
+                                    <option value={5}>5</option>
+                                    <option value={10}>10</option>
+                                    <option value={15}>15</option>
+                                </select>
+                                staff per page
                             </div>
-                        </Modal>
-                    )}
+
+                            <div>
+                                <button
+                                    className="btn btn-secondary mx-1"
+                                    disabled={currentPage === 1}
+                                    onClick={() => setCurrentPage((prev) => prev - 1)}
+                                >
+                                    Previous
+                                </button>
+                                Page {currentPage} / {totalPages}
+                                <button
+                                    className="btn btn-secondary mx-1"
+                                    disabled={currentPage === totalPages}
+                                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
+            {isModalOpen && (
+                <Modal>
+                    <div className="modal-content">
+                        <h2 className="modal-title">Confirm Deletion</h2>
+                        <p className="modal-warning">
+                            Are you sure you want to delete staff: {" "}
+                            <strong>{staffToDelete.NAME}</strong>?
+                        </p>
+                        <div className="modal-actions">
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button className="btn btn-danger" onClick={confirmDelete}>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </Modal>
+            )}
         </>
     );
 };
