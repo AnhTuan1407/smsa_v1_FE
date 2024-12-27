@@ -1,0 +1,307 @@
+.content-staffnoti {
+    animation: fadeInContent 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    /* Added `forwards` */
+}
+
+
+.notification-staffnoti {
+    animation: fadeInNotification 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Content Styles */
+.content-staffnoti {
+    margin-left: 300px;
+    /* Increased from 280px to create more space */
+    margin-right: 30px;
+    /* Added right margin for additional spacing */
+    margin-top: 90px;
+    padding: 35px;
+    width: calc(100% - 380px);
+    /* Adjusted width to account for new margins */
+    min-height: calc(100vh - 130px);
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    animation: fadeInContent 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.3s ease;
+}
+
+.delete-staffnoti {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #FF6B6B;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.delete-staffnoti:hover {
+    color: #FF4757;
+}
+
+.content-staffnoti:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.content-staffnoti-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.content-staffnoti-header h2 {
+    color: #003366;
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+.content-staffnoti-header .action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.content-staffnoti-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+}
+
+.content-staffnoti-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 2px solid #f0f0f0;
+    padding-top: 15px;
+}
+
+/* Notification Container Styles */
+.notifications-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Notification Item Styles */
+.notification-staffnoti {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    transition: all 0.3s ease;
+    border-left: 4px solid #003366;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.notification-staffnoti:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.notification-staffnoti-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-staffnoti-header h3 {
+    color: #003366;
+    margin: 0;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.notification-staffnoti-header .timestamp {
+    color: #6B7280;
+    font-size: 0.8em;
+}
+
+.notification-staffnoti p {
+    color: #4B5563;
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+/* Notification Actions Positioning */
+.notification-staffnoti .notification-actions {
+    display: flex;
+    justify-content: flex-end;
+    /* Align items to the right */
+    align-items: center;
+    position: absolute;
+    /* Positioning relative to notification */
+    top: 10px;
+    right: 10px;
+}
+
+.notification-staffnoti .notification-actions i {
+    color: #6B7280;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-left: 10px;
+    /* Space between icons */
+}
+
+.notification-staffnoti .notification-actions i:hover {
+    color: #FF6B6B;
+    /* Highlight color on hover */
+}
+
+/* Trash Icon Specific Styling */
+.notification-staffnoti .notification-actions .trash-icon {
+    color: #FF6B6B;
+    /* Distinct color for delete action */
+}
+
+.notification-staffnoti .notification-actions .trash-icon:hover {
+    color: #FF4757;
+    /* Darker shade on hover */
+    transform: scale(1.1);
+    /* Slight scale effect */
+}
+
+/* Status Indicators */
+.notification-staffnoti.urgent {
+    border-left-color: #FF6B6B;
+}
+
+.notification-staffnoti.normal {
+    border-left-color: #4ECDC4;
+}
+
+.notification-staffnoti.low-priority {
+    border-left-color: #A8DADC;
+}
+
+
+/* Button Container Styles */
+.button-container-staffnoti {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.button-container-staffnoti .btn-staffnoti {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: 200px;
+    /* Added fixed width */
+    justify-content: center;
+    /* Center content */
+}
+
+/* Primary Button */
+.button-container-staffnoti .btn-primary-staffnoti {
+    background-color: #003366;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button-container-staffnoti .btn-primary-staffnoti:hover {
+    background-color: #004080;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button-container-staffnoti .btn-primary-staffnoti i {
+    margin-right: 8px;
+}
+
+/* Secondary Button */
+.button-container-staffnoti .btn-secondary-staffnoti {
+    background-color: #f0f0f0;
+    color: #003366;
+    border: 1px solid #e0e0e0;
+}
+
+.button-container-staffnoti .btn-secondary-staffnoti:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+/* Active State */
+.button-container-staffnoti .btn-staffnoti:active {
+    transform: scale(0.95);
+}
+
+/* Disabled State */
+.button-container-staffnoti .btn-staffnoti:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* Sidebar Animation - Prevent Overlay */
+.sidebar-staffnoti {
+    animation: slideInRight 0.6s ease-out forwards;
+    z-index: 1000;
+    /* Ensure sidebar stays on top */
+    position: fixed;
+    /* Maintain fixed positioning */
+}
+
+/* Header Animation - Prevent Overlay */
+.header-staffnoti {
+    animation: fadeIn 0.5s ease-out;
+    z-index: 999;
+    /* Slightly lower than sidebar */
+}
+
+/* Content Animation with Controlled Overlay */
+.content-staffnoti {
+    animation: fadeIn 0.7s ease-out;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    position: relative;
+    z-index: 1;
+    /* Ensure content is below header and sidebar */
+}
+
+/* Notification Hover Effect */
+.notification-staffnoti {
+    transition: all 0.3s ease;
+}
+
+.notification-staffnoti:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Subtle Animation */
+.btn-staffnoti {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-staffnoti:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,488 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.header-clientappointment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #8ca3ba;
+    padding: 10px 20px;
+    color: #333;
+    transition: all 0.3s ease;
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.header-clientappointment:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-clientappointment nav {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link-clientappointment {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    animation: fadeInRight 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.nav-link-clientappointment:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.nav-link-clientappointment:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.nav-link-clientappointment:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.nav-link-clientappointment:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.nav-link-clientappointment:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.nav-link-clientappointment:hover {
+    color: #002f6c;
+    transform: translateY(-2px);
+}
+
+.social-icons-clientappointment a {
+    color: #fff;
+    margin-left: 10px;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+    animation: bounceIn 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    50% {
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+
+    80% {
+        opacity: 1;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.social-icons-clientappointment a:nth-child(1) {
+    animation-delay: 0.6s;
+}
+
+.social-icons-clientappointment a:nth-child(2) {
+    animation-delay: 0.7s;
+}
+
+.social-icons-clientappointment a:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+.social-icons-clientappointment a:hover {
+    transform: scale(1.2);
+}
+
+.login-clientappointment {
+    display: flex;
+    gap: 15px;
+    animation: fadeInLeft 0.5s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.login-btn-clientappointment,
+.scan-btn-clientappointment {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-btn-clientappointment:hover,
+.scan-btn-clientappointment:hover {
+    background-color: #002f6c;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container-clientappointment {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 35px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container-clientappointment:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 47, 108, 0.2);
+}
+
+.container-clientappointment>h2 {
+    text-align: center;
+    color: #fff;
+    background-color: #002f6c;
+    padding: 15px;
+    margin: -30px -30px 30px -30px;
+    border-radius: 15px 15px 0 0;
+    font-size: 1.5em;
+    animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.booking-form-clientappointment {
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+.form-group-clientappointment {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.form-group-clientappointment:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.form-group-clientappointment:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.form-group-clientappointment:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.form-group-clientappointment:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.form-group-clientappointment:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.form-group-clientappointment label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-group-clientappointment select,
+.form-group-clientappointment input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group-clientappointment input[type="date"],
+.form-group-clientappointment input[type="time"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.scan-button-clientappointment {
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    color: #002f6c;
+    border: 1px solid #002f6c;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.scan-button-clientappointment:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 47, 108, 0.2);
+}
+
+.scan-button-clientappointment i {
+    font-size: 18px;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.time-slots-clientappointment {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.time-slot-clientappointment {
+    padding: 10px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.time-slot-clientappointment:hover {
+    background: #f0f7ff;
+    border-color: #002f6c;
+}
+
+.time-slot-clientappointment.selected {
+    background: #002f6c;
+    color: #fff;
+    border-color: #002f6c;
+    animation: selectedPulse 1s infinite;
+}
+
+@keyframes selectedPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 47, 108, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 47, 108, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 47, 108, 0);
+    }
+}
+
+.button-group-clientappointment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 35px;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cancel-btn-clientappointment,
+.confirm-btn-clientappointment {
+    width: 48%;
+    padding: 16px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    letter-spacing: 0.5px;
+}
+
+.cancel-btn-clientappointment {
+    background: linear-gradient(135deg, #fff, #f0f7ff);
+    color: #002f6c;
+    border: 2px solid #002f6c;
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.confirm-btn-clientappointment {
+    background: linear-gradient(135deg, #002f6c, #004299);
+    color: #fff;
+    border: none;
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.cancel-btn-clientappointment:hover {
+    background: linear-gradient(135deg, #f0f7ff, #e8f0fe);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 47, 108, 0.2);
+}
+
+.confirm-btn-clientappointment:hover {
+    background: linear-gradient(135deg, #004299, #005ad1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 47, 108, 0.3);
+}

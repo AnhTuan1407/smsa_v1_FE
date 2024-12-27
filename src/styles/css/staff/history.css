@@ -1,0 +1,98 @@
+/* Main content adjustment */
+.main-content-staffappointment {
+    margin-left: 280px;
+    margin-top: 70px;
+    padding: 35px;
+    width: calc(100% - 280px);
+    min-height: calc(100vh - 70px);
+    background: #f8f9fa;
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Appointments List Styles */
+.appointments-list-staffappointment {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.appointments-title-staffappointment {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #003366;
+    font-size: 24px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.appointment-item-staffappointment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.appointment-item-staffappointment:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(to right, #f8f9fa, #e8f4ff);
+}
+
+.appointment-details-staffappointment {
+    flex: 1;
+}
+
+.appointment-details-staffappointment strong {
+    display: block;
+    font-size: 18px;
+    color: #003366;
+    margin-bottom: 5px;
+}
+
+.appointment-details-staffappointment p {
+    color: #666;
+    margin: 0;
+}
+
+.appointment-status-staffappointment {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    margin: 0 20px;
+}
+
+.status-pending-staffappointment {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-completed-staffappointment {
+    background: #d4edda;
+    color: #155724;
+}
+
+.view-details-staffappointment {
+    padding: 10px 20px;
+    background: #003366;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-details-staffappointment:hover {
+    background: #004080;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

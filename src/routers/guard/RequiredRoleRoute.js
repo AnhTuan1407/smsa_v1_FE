@@ -7,7 +7,7 @@ const RequiredRoleRoute = ({ children, requiredRole }) => {
 
     if (!role) {
         toast.error('Thông báo: Hãy đăng nhập trước!');
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
 
     if (role !== requiredRole) {

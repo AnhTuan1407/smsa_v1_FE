@@ -89,7 +89,7 @@ const ServiceDetail = () => {
                 </div>
                 <div className="btn-booking">
                     <div className="content">
-                        <a href="">ĐẶT LỊCH NGAY</a>
+                        <a href="/client/booking">ĐẶT LỊCH NGAY</a>
                     </div>
                 </div>
             </div>

@@ -96,7 +96,7 @@ const SubCategoryDetail = () => {
 
             <div className="btn-booking">
                 <div className="content">
-                    <a href="/booking">ĐẶT LỊCH NGAY</a>
+                    <a href="/client/booking">ĐẶT LỊCH NGAY</a>
                 </div>
             </div>
         </div>
