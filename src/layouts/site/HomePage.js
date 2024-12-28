@@ -146,7 +146,7 @@ const HomePage = () => {
                         <div className="slogan-text">Cắt xong trả tiền, hủy lịch không sao</div>
                     </div>
                     <div className="btn-booking-home">
-                        <a href="/booking">ĐẶT LỊCH NGAY</a>
+                        <a href="/client/booking">ĐẶT LỊCH NGAY</a>
                     </div>
                 </div>
             </div>

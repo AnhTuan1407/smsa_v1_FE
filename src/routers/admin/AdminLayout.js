@@ -143,6 +143,22 @@ const AdminLayout = () => {
                             </div>
                         </li>
 
+                        {/* Nav Item - Schedule */}
+                        <li className="nav-item">
+                            <a className="nav-link collapsed" href="/admin/staff/list" data-toggle="collapse" data-target="#collapseSchedule"
+                                aria-expanded="false" aria-controls="collapseSchedule">
+                                <i className="fas fa-fw fa-users"></i>
+                                <span>Schedule</span>
+                            </a>
+                            <div id="collapseSchedule" className="collapse" aria-labelledby="headingSchedule" data-parent="#accordionSidebar">
+                                <div className="bg-white py-2 collapse-inner rounded">
+                                    <h6 className="collapse-header">Options:</h6>
+                                    <a className="collapse-item" href="/admin/schedule/view">View Staff Schedules</a>
+                                    <a className="collapse-item" href="/admin/schedule/create">Split Schedule</a>
+                                </div>
+                            </div>
+                        </li>
+
 
                         {/* Nav Item - Tables */}
                         <li className="nav-item">

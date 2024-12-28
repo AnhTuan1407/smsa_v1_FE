@@ -75,6 +75,7 @@ function App() {
           ))}
         </Route>
 
+        {/* Client routes */}
         <Route path="/client">
           {clientRoutes.map((route, index) => (
             <Route

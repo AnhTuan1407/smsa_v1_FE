@@ -1,0 +1,20 @@
+.schedule-view table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.schedule-view th,
+.schedule-view td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.schedule-view th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.schedule-view .week-navigation {
+    margin-bottom: 20px;
+}
