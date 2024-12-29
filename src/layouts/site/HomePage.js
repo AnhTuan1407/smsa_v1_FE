@@ -154,7 +154,7 @@ const HomePage = () => {
             <div id="wp-service">
                 {categories.map((category) => (
                     <div className="service-content" key={category.CATEGORY_ID}>
-                        <div className="category-title">{category.NAME}</div>
+                        <div className="category-title">DỊCH VỤ {category.NAME}</div>
 
                         <div className="service-list">
                             <ul>

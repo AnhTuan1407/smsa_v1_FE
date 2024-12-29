@@ -39,11 +39,7 @@ const Header = () => {
                 <div className="header-container">
                     <div className="logo">
                         <a href="/">
-                            <img
-                                className="img-logo"
-                                src="/images/logo_30shine_new.7135aeb8.png"
-                                alt="Loading..."
-                            />
+                            
                         </a>
                     </div>
                     <div className="nav-bar-menu">

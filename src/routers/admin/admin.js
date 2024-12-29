@@ -1,4 +1,5 @@
 import Dashboard from '../../layouts/admin/Dashboard';
+import AdminHome from '../../layouts/admin/AdminHome';
 import serviceRoutes from './service';
 import categoryRoutes from './category';
 import customerRoutes from './customer';
@@ -18,6 +19,10 @@ const adminRoutes = [
     {
         path: 'dashboard',
         element: <Dashboard />,
+    },
+    {
+        path: '',
+        element: <AdminHome />,
     },
     {
         path: '*', // Catch-all route for invalid admin paths
