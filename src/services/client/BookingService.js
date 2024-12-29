@@ -80,3 +80,35 @@ export const remove = async (id) => {
         throw new Error("Có lỗi xảy ra, vui lòng thử lại sau!");
     }
 };
+
+export const findByStaff = async (staffId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/findByStaff/${staffId}`);
+        if (response.data) {
+            return response.data;
+        } else {
+            throw new Error('Không có dữ liệu phản hồi!');
+        }
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw error.response.data;
+        }
+        throw new Error("Có lỗi xảy ra, vui lòng thử lại sau!");
+    }
+};
+
+export const findByCustomer = async (customerId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/findByCustomer/${customerId}`);
+        if (response.data) {
+            return response.data;
+        } else {
+            throw new Error('Không có dữ liệu phản hồi!');
+        }
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw error.response.data;
+        }
+        throw new Error("Có lỗi xảy ra, vui lòng thử lại sau!");
+    }
+};

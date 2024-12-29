@@ -62,7 +62,7 @@ const Header = () => {
                             </>
                         ) : (
                             <>
-                                <div className="auth-item-3"><a href="#" onClick={logout}>Logout</a></div>
+                                <div className="auth-item-3"><a href="#" onClick={logout}>Đăng xuất</a></div>
 
                                 <li className="nav-item dropdown no-arrow user-info">
                                     <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -80,15 +80,21 @@ const Header = () => {
                                     <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                         aria-labelledby="userDropdown">
                                         {user.role === "Customer" && (
-                                            <a className="dropdown-item" href="/profile">
-                                                <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Profile
-                                            </a>
+                                            <>
+                                                <a className="dropdown-item" href="/client/profile">
+                                                    <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Thông tin cá nhân
+                                                </a>
+                                                <a className="dropdown-item" href="/client/appointment">
+                                                    <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Danh sách cuộc hẹn
+                                                </a>
+                                            </>
                                         )}
                                         {user.role === "Staff" && (
-                                            <a className="dropdown-item" href="/staff-home">
+                                            <a className="dropdown-item" href="/staff">
                                                 <i className="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Staff Homepage
+                                                Kênh nhân viên
                                             </a>
                                         )}
                                         {user.role === "Admin" && (
@@ -100,7 +106,7 @@ const Header = () => {
                                         <div className="dropdown-divider"></div>
                                         <a className="dropdown-item" href="#" onClick={logout}>
                                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Logout
+                                            Đăng xuất
                                         </a>
                                     </div>
                                 </li>

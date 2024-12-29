@@ -68,3 +68,21 @@ export const deleteById = async (id) => {
         throw new Error("Có lỗi xảy ra, vui lòng thử lại sau!");
     }
 }
+
+export const editProfile = async (values) => {
+    try {
+        const response = await axios.put(`${BASE_URL}/edit`, values);
+
+        if (response.data) {
+            return response.data;
+        } else {
+            throw new Error("Không có dữ liệu trả về!");
+        }
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw error.response.data; // Trả về toàn bộ object lỗi từ BE
+        }
+        // Lỗi khác (không phải từ BE)
+        throw new Error("Có lỗi xảy ra, vui lòng thử lại sau!");
+    }
+}

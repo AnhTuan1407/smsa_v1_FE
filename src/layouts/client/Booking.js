@@ -22,6 +22,7 @@ const Booking = () => {
     const [selectedTime, setSelectedTime] = useState('');
     const [schedule, setSchedule] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
+    const [appointments, setAppointments] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -134,8 +135,15 @@ const Booking = () => {
                 } else {
                     console.error('Unable to load schedule!');
                 }
+
+                const appointmentsResponse = await bookingService.findByStaff(staffId);
+                if (appointmentsResponse.success) {
+                    setAppointments(appointmentsResponse.data);
+                } else {
+                    console.error('Unable to load appointments!');
+                }
             } catch (error) {
-                toast.error("Error loading schedule: " + error.message);
+                toast.error("Error loading schedule or appointments: " + error.message);
             }
         }
     };
@@ -154,12 +162,19 @@ const Booking = () => {
             return;
         }
 
+        const totalServiceTime = selectedServices.reduce((total, service) => total + service.ESTIMATE_TIME, 0);
+        const [hours, minutes] = selectedTime.split(':').map(Number);
+        const endTime = new Date();
+        endTime.setHours(hours);
+        endTime.setMinutes(minutes + totalServiceTime);
+
         const bookingData = {
             customerId: localStorage.getItem('idPerson'),
             staffId: selectedStaff,
             serviceIds: selectedServices.map(service => service.SERVICE_ID),
             date: selectedDate,
             time: selectedTime,
+            endTime: `${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`
         };
 
         try {
@@ -226,6 +241,21 @@ const Booking = () => {
         }
         if (staffSchedule.SHIFT_ID === 3 && (timeInMinutes < 7 * 60 || timeInMinutes >= 17 * 60)) {
             return true; // Full day shift: 7:00 AM - 5:00 PM
+        }
+
+        // Disable time slots based on existing appointments
+        const conflictingAppointments = appointments.filter(appointment =>
+            appointment.STATUS !== "Done" && appointment.DATE_BOOKING === selectedDate
+        );
+
+        for (let appointment of conflictingAppointments) {
+            if (appointment.TIME_END) {
+                const [endHours, endMinutes] = appointment.TIME_END.split(':').map(Number);
+                const appointmentEndTimeInMinutes = endHours * 60 + endMinutes;
+                if (timeInMinutes < appointmentEndTimeInMinutes) {
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -328,8 +358,8 @@ const Booking = () => {
                     )}
 
                     <div className="form-group-clientappointment button-group-clientappointment">
-                        <button className="confirm-btn-clientappointment" onClick={handleSubmit}>Submit</button>
                         <button className="cancel-btn-clientappointment" onClick={handleBack}>Quay lại</button>
+                        <button className="confirm-btn-clientappointment" onClick={handleSubmit}>Chốt giờ cắt</button>
                     </div>
                 </div>
             )}

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Topbar from '../../components/admin/Topbar';
-import Sidebar from '../../components/admin/Sidebar';
-
+import { useAuth } from '../../context/AuthContext';
 const AdminLayout = () => {
+
+    const { user, logout } = useAuth();
+
     return (
         <>
             <div id="page-top">
@@ -387,7 +388,7 @@ const AdminLayout = () => {
                                                 Activity Log
                                             </a>
                                             <div className="dropdown-divider"></div>
-                                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                            <a className="dropdown-item" href="#" onClick={logout} data-toggle="modal" data-target="#logoutModal">
                                                 <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 Logout
                                             </a>

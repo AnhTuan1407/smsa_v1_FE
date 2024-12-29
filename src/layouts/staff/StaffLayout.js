@@ -2,11 +2,14 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import "../../styles/css/staff/layout.css";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import { useAuth } from '../../context/AuthContext';
 
 const StaffLayout = () => {
 
     const navigate = useNavigate();
+
+    const { user, logout } = useAuth();
 
     return (
         <>
@@ -55,10 +58,12 @@ const StaffLayout = () => {
                     <select>
                         <option>Việt Nam</option>
                     </select>
-                    <button>Stylist 1</button>
                     <i className="far fa-question-circle"></i>
                     <i className="far fa-bell"></i>
                     <i className="fas fa-sliders-h"></i>
+                    <button onClick={logout} className="logout-button">
+                        <i className="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
                 </div>
             </div>
 
